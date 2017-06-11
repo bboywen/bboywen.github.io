@@ -100,7 +100,7 @@
 <meta property="og:image" content="http://bboywen.com/2017/06/11/dataValidator/优化一.jpg">
 <meta property="og:image" content="http://bboywen.com/2017/06/11/dataValidator/中介者优化方案.jpg">
 <meta property="og:image" content="http://bboywen.com/2017/06/11/dataValidator/测试结果.jpg">
-<meta property="og:updated_time" content="2017-06-11T10:44:36.937Z">
+<meta property="og:updated_time" content="2017-06-11T10:49:33.896Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据有效性组件">
 <meta name="twitter:description" content="记得用gitHub与hexo搭载个人博客还是去年11月份弄的。但是至今都没有写一篇博客。实在无力吐槽自己。。。以后将会每周至少写一篇博客，希望有大神对博客内容进行批评指正。下面步入正题，针对最近使用中介者模式进行开发项目中的一个数据有效性组件记录了思考过程。
@@ -337,7 +337,9 @@
 </blockquote>
 <h3 id="初步处理方案"><a href="#初步处理方案" class="headerlink" title="初步处理方案"></a>初步处理方案</h3><blockquote>
 <p>   涉及上面描述的场景的表单较多，如果分配给负责每个表单的人进行数据校验的话，表单与基础数据为1对n的关系，交互图如下：<br>    <img src="/2017/06/11/dataValidator/初步方案.jpg" alt="初步处理方案"><br>    缺点：每个人都需要写交互的action以及数据校验的service代码，表单与基础数据之前进行了强耦合，当业务有变更的话，几乎要改动每个人的action,service代码。对于项目后期阶段更是不能容忍经常修改代码的行为。</p>
-<h3 id="提出优化1"><a href="#提出优化1" class="headerlink" title="提出优化1"></a>提出优化1</h3><p>   大家统一使用同一个action,service进行交互。这样大大减少了重复代码。让需要修改的地方更集中。交互图如下：<br>    <img src="/2017/06/11/dataValidator/优化一.jpg" alt="优化一"></p>
+</blockquote>
+<h3 id="提出优化1"><a href="#提出优化1" class="headerlink" title="提出优化1"></a>提出优化1</h3><blockquote>
+<p>   大家统一使用同一个action,service进行交互。这样大大减少了重复代码。让需要修改的地方更集中。交互图如下：<br>    <img src="/2017/06/11/dataValidator/优化一.jpg" alt="优化一"></p>
 <p>   优化1缺点：如果各种基础数据校验的方法都写在同一个service里面，由于需要多人使用，业务一变更，数据有效性校验方式更换，加入新的基础数据校验等等，都会带来多人修改一个service的情况。这会使得这个类权责太多，极其的不稳定，随时带来隐患。</p>
 </blockquote>
 <h3 id="提出优化2"><a href="#提出优化2" class="headerlink" title="提出优化2"></a>提出优化2</h3><blockquote>
