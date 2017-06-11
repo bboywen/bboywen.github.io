@@ -84,25 +84,29 @@
 
 
 
-<meta name="description" content="记得用gitHub与hexo搭载个人博客还是去年11月份弄的。但是至今都没有写一篇博客。实在无力吐槽自己。。。
-以后将会每周至少写一篇博客，希望有大神对博客内容进行批评指正。
-下面步入正题，针对最近使用中介者模式进行开发项目中的一个数据有效性组件记录了思考过程。
-问题处理过程问题场景最近在项目中遇到一个问题，在系统中有一个复制新建表单的功能，当复制新建已提交的表单时，提交的内容中可能包含已经无效的">
+<meta name="description" content="记得用gitHub与hexo搭载个人博客还是去年11月份弄的。但是至今都没有写一篇博客。实在无力吐槽自己。。。以后将会每周至少写一篇博客，希望有大神对博客内容进行批评指正。下面步入正题，针对最近使用中介者模式进行开发项目中的一个数据有效性组件记录了思考过程。
+
+问题处理过程问题场景
+ 最近在项目中遇到一个问题，在系统中有一个复制新建表单的功能，当复制新建已提交的表单时，提交的内容中可能包含已经">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据有效性组件">
 <meta property="og:url" content="http://bboywen.com/2017/06/11/dataValidator/index.html">
 <meta property="og:site_name" content="I have a dream">
-<meta property="og:description" content="记得用gitHub与hexo搭载个人博客还是去年11月份弄的。但是至今都没有写一篇博客。实在无力吐槽自己。。。
-以后将会每周至少写一篇博客，希望有大神对博客内容进行批评指正。
-下面步入正题，针对最近使用中介者模式进行开发项目中的一个数据有效性组件记录了思考过程。
-问题处理过程问题场景最近在项目中遇到一个问题，在系统中有一个复制新建表单的功能，当复制新建已提交的表单时，提交的内容中可能包含已经无效的">
-<meta property="og:updated_time" content="2017-06-11T06:01:13.363Z">
+<meta property="og:description" content="记得用gitHub与hexo搭载个人博客还是去年11月份弄的。但是至今都没有写一篇博客。实在无力吐槽自己。。。以后将会每周至少写一篇博客，希望有大神对博客内容进行批评指正。下面步入正题，针对最近使用中介者模式进行开发项目中的一个数据有效性组件记录了思考过程。
+
+问题处理过程问题场景
+ 最近在项目中遇到一个问题，在系统中有一个复制新建表单的功能，当复制新建已提交的表单时，提交的内容中可能包含已经">
+<meta property="og:image" content="http://bboywen.com/./img/dataValidate/初步方案.jpg">
+<meta property="og:image" content="http://bboywen.com/file:///D:/soft/Hexo/img/dataValidate/优化一.jpg">
+<meta property="og:image" content="http://bboywen.com/D:\soft\Hexo\img\dataValidate\中介者优化方案.jpg">
+<meta property="og:updated_time" content="2017-06-11T07:25:01.217Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据有效性组件">
-<meta name="twitter:description" content="记得用gitHub与hexo搭载个人博客还是去年11月份弄的。但是至今都没有写一篇博客。实在无力吐槽自己。。。
-以后将会每周至少写一篇博客，希望有大神对博客内容进行批评指正。
-下面步入正题，针对最近使用中介者模式进行开发项目中的一个数据有效性组件记录了思考过程。
-问题处理过程问题场景最近在项目中遇到一个问题，在系统中有一个复制新建表单的功能，当复制新建已提交的表单时，提交的内容中可能包含已经无效的">
+<meta name="twitter:description" content="记得用gitHub与hexo搭载个人博客还是去年11月份弄的。但是至今都没有写一篇博客。实在无力吐槽自己。。。以后将会每周至少写一篇博客，希望有大神对博客内容进行批评指正。下面步入正题，针对最近使用中介者模式进行开发项目中的一个数据有效性组件记录了思考过程。
+
+问题处理过程问题场景
+ 最近在项目中遇到一个问题，在系统中有一个复制新建表单的功能，当复制新建已提交的表单时，提交的内容中可能包含已经">
+<meta name="twitter:image" content="http://bboywen.com/./img/dataValidate/初步方案.jpg">
 
 
 
@@ -324,21 +328,21 @@
       
 
       
-        <pre><code>记得用gitHub与hexo搭载个人博客还是去年11月份弄的。但是至今都没有写一篇博客。实在无力吐槽自己。。。
-以后将会每周至少写一篇博客，希望有大神对博客内容进行批评指正。
-下面步入正题，针对最近使用中介者模式进行开发项目中的一个数据有效性组件记录了思考过程。
-</code></pre><h2 id="问题处理过程"><a href="#问题处理过程" class="headerlink" title="问题处理过程"></a>问题处理过程</h2><h3 id="问题场景"><a href="#问题场景" class="headerlink" title="问题场景"></a>问题场景</h3><pre><code>最近在项目中遇到一个问题，在系统中有一个复制新建表单的功能，当复制新建已提交的表单时，提交的内容中可能包含已经无效的基础数据，因此需要对复制过来的表单中的基础数据进行有效性校验。
-</code></pre><h3 id="初步处理方案"><a href="#初步处理方案" class="headerlink" title="初步处理方案"></a>初步处理方案</h3><pre><code>涉及上面描述的场景的表单较多，如果分配给负责每个表单的人进行数据校验的话，表单与基础数据为1对n的关系，交互图如下：
-![初步处理方案](D:\\soft\\Hexo\\img\\dataValidate\\初步方案)
-缺点：每个人都需要写交互的action以及数据校验的service代码，表单与基础数据之前进行了强耦合，当业务有变更的话，几乎要改动每个人的action,service代码。对于项目后期阶段更是不能容忍经常修改代码的行为。
-</code></pre><h3 id="提出优化1"><a href="#提出优化1" class="headerlink" title="提出优化1"></a>提出优化1</h3><pre><code>大家统一使用同一个action,service进行交互。这样大大减少了重复代码。让需要修改的地方更集中。交互图如下：
-![优化一](D:\\soft\\Hexo\\img\\dataValidate\\优化一)
-
-优化1缺点：如果各种基础数据校验的方法都写在同一个service里面，由于需要多人使用，业务一变更，数据有效性校验方式更换，加入新的基础数据校验等等，都会带来多人修改一个service的情况。这会使得这个类权责太多，极其的不稳定，随时带来隐患。
-</code></pre><h3 id="提出优化2"><a href="#提出优化2" class="headerlink" title="提出优化2"></a>提出优化2</h3><pre><code>service与基础数据为1对n关系，service权责太多，依据单一职责原则，将service拆解成多个对应基础数据的校验类，如：Data1Handler,Data2Handler,而Action与handler形成1：n关系，基于面向对象设计原则，我们维护1而不维护n，而Action不负责业务代码，因此我们可以抽取出中间层DataValidator进行校验处理，进而分发给各handler处理。再基础面向接口原则，可以抽取出对应接口。其实这里就是应用了中介者模式。
-![中介者优化方案](D:\\soft\\Hexo\\img\\dataValidate\\中介者优化方案)
-根据优化方案2，将数据有效性校验的参数以及返回结果进行封装。
-</code></pre><h2 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h2>
+        <blockquote>
+<p> 记得用gitHub与hexo搭载个人博客还是去年11月份弄的。但是至今都没有写一篇博客。实在无力吐槽自己。。。<br>以后将会每周至少写一篇博客，希望有大神对博客内容进行批评指正。<br>下面步入正题，针对最近使用中介者模式进行开发项目中的一个数据有效性组件记录了思考过程。</p>
+</blockquote>
+<h2 id="问题处理过程"><a href="#问题处理过程" class="headerlink" title="问题处理过程"></a>问题处理过程</h2><h3 id="问题场景"><a href="#问题场景" class="headerlink" title="问题场景"></a>问题场景</h3><blockquote>
+<p> 最近在项目中遇到一个问题，在系统中有一个复制新建表单的功能，当复制新建已提交的表单时，提交的内容中可能包含已经无效的基础数据，因此需要对复制过来的表单中的基础数据进行有效性校验。</p>
+</blockquote>
+<h3 id="初步处理方案"><a href="#初步处理方案" class="headerlink" title="初步处理方案"></a>初步处理方案</h3><blockquote>
+<p>   涉及上面描述的场景的表单较多，如果分配给负责每个表单的人进行数据校验的话，表单与基础数据为1对n的关系，交互图如下：<br>    <img src="./img/dataValidate/初步方案.jpg" alt="初步处理方案"><br>    缺点：每个人都需要写交互的action以及数据校验的service代码，表单与基础数据之前进行了强耦合，当业务有变更的话，几乎要改动每个人的action,service代码。对于项目后期阶段更是不能容忍经常修改代码的行为。</p>
+<h3 id="提出优化1"><a href="#提出优化1" class="headerlink" title="提出优化1"></a>提出优化1</h3><p>   大家统一使用同一个action,service进行交互。这样大大减少了重复代码。让需要修改的地方更集中。交互图如下：<br>    <img src="file:///D:/soft/Hexo/img/dataValidate/优化一.jpg" alt="优化一"></p>
+<p>   优化1缺点：如果各种基础数据校验的方法都写在同一个service里面，由于需要多人使用，业务一变更，数据有效性校验方式更换，加入新的基础数据校验等等，都会带来多人修改一个service的情况。这会使得这个类权责太多，极其的不稳定，随时带来隐患。</p>
+</blockquote>
+<h3 id="提出优化2"><a href="#提出优化2" class="headerlink" title="提出优化2"></a>提出优化2</h3><blockquote>
+<p>   service与基础数据为1对n关系，service权责太多，依据单一职责原则，将service拆解成多个对应基础数据的校验类，如：Data1Handler,Data2Handler,而Action与handler形成1：n关系，基于面向对象设计原则，我们维护1而不维护n，而Action不负责业务代码，因此我们可以抽取出中间层DataValidator进行校验处理，进而分发给各handler处理。再基础面向接口原则，可以抽取出对应接口。其实这里就是应用了中介者模式。<br>    <img src="D:\soft\Hexo\img\dataValidate\中介者优化方案.jpg" alt="中介者优化方案"><br>   根据优化方案2，将数据有效性校验的参数以及返回结果进行封装。</p>
+</blockquote>
+<h2 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h2>
       
     </div>
 
