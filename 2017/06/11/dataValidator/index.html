@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://bboywen.com/2017/06/11/dataValidator/初步方案.jpg">
 <meta property="og:image" content="http://bboywen.com/2017/06/11/dataValidator/优化一.jpg">
 <meta property="og:image" content="http://bboywen.com/2017/06/11/dataValidator/中介者优化方案.jpg">
-<meta property="og:updated_time" content="2017-06-11T07:35:19.163Z">
+<meta property="og:updated_time" content="2017-06-11T07:59:06.796Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据有效性组件">
 <meta name="twitter:description" content="记得用gitHub与hexo搭载个人博客还是去年11月份弄的。但是至今都没有写一篇博客。实在无力吐槽自己。。。以后将会每周至少写一篇博客，希望有大神对博客内容进行批评指正。下面步入正题，针对最近使用中介者模式进行开发项目中的一个数据有效性组件记录了思考过程。
@@ -340,7 +340,7 @@
 <p>   优化1缺点：如果各种基础数据校验的方法都写在同一个service里面，由于需要多人使用，业务一变更，数据有效性校验方式更换，加入新的基础数据校验等等，都会带来多人修改一个service的情况。这会使得这个类权责太多，极其的不稳定，随时带来隐患。</p>
 </blockquote>
 <h3 id="提出优化2"><a href="#提出优化2" class="headerlink" title="提出优化2"></a>提出优化2</h3><blockquote>
-<p>   service与基础数据为1对n关系，service权责太多，依据单一职责原则，将service拆解成多个对应基础数据的校验类，如：Data1Handler,Data2Handler,而Action与handler形成1：n关系，基于面向对象设计原则，我们维护1而不维护n，而Action不负责业务代码，因此我们可以抽取出中间层DataValidator进行校验处理，进而分发给各handler处理。再基础面向接口原则，可以抽取出对应接口。其实这里就是应用了中介者模式。<br>    <img src="/2017/06/11/dataValidator/中介者优化方案.jpg" alt="中介者优化方案"><br>   根据优化方案2，将数据有效性校验的参数以及返回结果进行封装。</p>
+<p>   service与基础数据为1对n关系，service权责太多，依据单一职责原则，将service拆解成多个对应基础数据的校验类，如：Data1Handler,Data2Handler,而Action与handler形成1：n关系，基于面向对象设计原则，我们维护1而不维护n，而Action不负责业务代码，因此我们可以抽取出中间层DataValidator进行校验处理，进而分发给各handler处理。再基于面向接口原则，可以抽取出对应接口。其实这里就是应用了中介者模式。<br>    <img src="/2017/06/11/dataValidator/中介者优化方案.jpg" alt="中介者优化方案"><br>   根据优化方案2，将数据有效性校验的参数以及返回结果进行封装。</p>
 </blockquote>
 <h2 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h2>
       
