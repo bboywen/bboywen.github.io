@@ -1680,7 +1680,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #30ba66;
+  background: #1b53aa;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2741,4 +2741,7 @@ hr {
     width: auto;
     text-align: center;
   }
+}
+.post-comments-count a::before {
+  content: "评论";
 }
